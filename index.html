@@ -2,21 +2,23 @@
   <head> </head>
   <style>
     .container {
-      width: 500px;
-      height: 600px;
-      border: 3px solid black;
+      width: "100%";
+      height: 100dvh;
+      border: 3px solid #744b04;
       position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       overflow: hidden;
     }
     h1 {
       font-size: 50px;
       margin-top: 50px;
+      color: #744b04;
     }
     .icecream {
-      width: 145px;
+      width: 200px;
       display: block;
       margin: 35px auto;
     }
@@ -40,17 +42,19 @@
       z-index: -1;
     }
     .start {
+      padding: 4 8;
       font-size: 20px;
+      background-color: #744b04;
+      color: #fff;
     }
   </style>
   <body>
     <div class="container">
-      <h1 class="scream">Teriaaakk!!</h1>
-      <img src="icecream.png" class="icecream" alt="" />
+      <h1 class="scream">Teriak Berhadiah !</h1>
+      <img src="goeboex1.png" class="icecream" alt="" />
       <div class="decibelmeter"></div>
+      <button type="button" class="start">Mulai</button>
     </div>
-    <br />
-    <button type="button" class="start">Mulai</button>
     <script>
       var scream = document.querySelector(".scream");
       var icecream = document.querySelector(".icecream");
@@ -81,7 +85,7 @@
 
             if (decibels >= 600) {
               scream.style.color = "white";
-              scream.innerHTML = "SELAMAT KAMU MENANG !!";
+              scream.innerHTML = "SELAMAT!, KAMU BERHASIL !!";
               icecream.classList.add("animate");
               clearInterval(decibelInterval);
             }
