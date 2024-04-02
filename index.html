@@ -1,26 +1,12 @@
 <html>
-  <head> </head>
+  <head> 
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
   <style>
-    .container {
-      width: "100%";
-      height: 100dvh;
-      border: 3px solid #744b04;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    h1 {
-      font-size: 50px;
-      margin-top: 50px;
-      color: #744b04;
-    }
     .icecream {
-      width: 200px;
+      width: 250px;
       display: block;
-      margin: 35px auto;
+      z-index: 20;
     }
     .icecream.animate {
       animation: imageAnimation 4s;
@@ -34,63 +20,118 @@
       }
     }
     .decibelmeter {
-      height: 0px;
-      width: 500px;
+      height: "0%";
+      width: 450px;
       position: absolute;
       bottom: 0;
-      background-color: #24110b;
-      z-index: -1;
-    }
-    .start {
-      padding: 4 8;
-      font-size: 20px;
-      background-color: #744b04;
-      color: #fff;
+      left: 10;
+      background-color: #f5bc00;
+      z-index: 10;
     }
   </style>
-  <body>
-    <div class="container">
-      <h1 class="scream">Teriak Berhadiah !</h1>
-      <img src="goeboex1.png" class="icecream" alt="" />
+  <body class="w-full h-[100dvh] flex flex-col">
+  <div class="w-full flex flex-row justify-start items-center flex-col bg-red-900 p-4 h-full">
+      <img src="goeboex1.png" class="icecream" alt="logo" />
+      <div class="flex justify-center item-center flex-col w-full">
+        <h1 id="scream" class="text-6xl font-bold text-center text-white z-20 duration-500 transform">Serukan Semangatmu, Luapkan Emosimu</h1>
+        <button type="button" id="start" class="block mt-10 z-20 px-4 py-2 bg-yellow-500 text-4xl text-black rounded-xl shadow-xl duration-500 transforml">Klik Mulai</button>
+        <button type="button" id="kembali" class="hidden mt-10 z-20 px-4 py-2 bg-gray-100 text-2xl text-black rounded-xl shadow-xl duration-500 transforml">Kembali</button>
+      </div>
+     
+      <!-- <p class="tes"></p> -->
+    </div>
+    <div id="indicator" class="h-full relative overflow-hidden bg-red-900 w-full flex hidden h-full">
       <div class="decibelmeter"></div>
-      <button type="button" class="start">Mulai</button>
+      <div class="absolute buttom-0 right-5 border-r-2 h-full flex flex-col justify-between px-2 items-end border-dashed">
+        <h1 class="text-white text-xl font-bold">100%</h1>
+        <h1 class="text-white text-xl font-bold">50%</h1>
+        <h1 class="text-white text-xl font-bold">0%</h1>
+      </div>
     </div>
     <script>
-      var scream = document.querySelector(".scream");
+      var scream = document.querySelector("#scream");
       var icecream = document.querySelector(".icecream");
       var decibelmeter = document.querySelector(".decibelmeter");
-      var start = document.querySelector(".start");
+      var start = document.querySelector("#start");
+      var indicator = document.querySelector("#indicator");
+      var tes = document.querySelector(".tes");
+      var kembali = document.querySelector("#kembali");
+
+      kembali.addEventListener('click', function(){
+        start.style.display ="block";
+        kembali.style.display ="none";
+        scream.className = "text-6xl font-bold text-center text-white z-20 duration-500 transform"
+        scream.innerHTML = "Serukan Semangatmu, Luapkan Emosimu";
+      });
 
       start.addEventListener("click", function () {
         var audioContext = new AudioContext();
         var streamPromise = navigator.mediaDevices.getUserMedia({ audio: true });
+        var countdown = 4;
+        start.style.display ="none";
+        scream.className = "text-6xl font-bold text-center text-white z-20 duration-500 transform animate-bounce"
+        scream.innerHTML = "SIAP - SIAP";
+        var intervalCountdown;
+        var intervalDuration;
+        var decibelInterval;
+        setTimeout(()=>{
+            intervalCountdown = setInterval(function(){
+            countdown -=1;
+            scream.className = "text-9xl font-bold text-center text-white z-20 duration-500 transform"
+            scream.innerHTML = countdown;
+            
+            if(countdown<=0){
+            clearInterval(intervalCountdown);
+            indicator.style.display="block";
+            var duration = 10;
+              intervalDuration = setInterval(function(){
+                duration -=1;
+                scream.className = "text-5xl font-bold text-center text-white z-20 duration-500 transform"
+                scream.innerHTML = duration;
 
-        streamPromise.then(function (stream) {
-          var microphone = audioContext.createMediaStreamSource(stream);
-          var analyser = audioContext.createAnalyser();
-          microphone.connect(analyser);
+                streamPromise.then(function (stream) {
+                  var microphone = audioContext.createMediaStreamSource(stream);
+                  var analyser = audioContext.createAnalyser();
+                  microphone.connect(analyser);
 
-          var decibelInterval = setInterval(function () {
-            var dataArray = new Uint8Array(analyser.frequencyBinCount);
-            analyser.getByteFrequencyData(dataArray);
+                  decibelInterval = setInterval(function () {
+                    var dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    analyser.getByteFrequencyData(dataArray);
 
-            var decibels = 0;
-            for (var i = 0; i < dataArray.length; i++) {
-              decibels += dataArray[i];
+                    var decibels = 0;
+                    for (var i = 0; i < dataArray.length; i++) {
+                      decibels += dataArray[i];
+                    }
+
+                    var level = 2; // you can adjust the level from 1.0 to 10.0
+                    decibels = (10 * decibels) / dataArray.length / level;
+                    let persen = (decibels/200)*100;
+                    decibelmeter.style.height = persen + "%";
+                    
+                    if (decibels >= 200 && duration > 0) { //600
+                      indicator.style.display="none";
+                      scream.className = "text-6xl font-bold text-white text-center"
+                      scream.innerHTML = "SELAMAT!, KAMU BERHASIL !!";
+                      icecream.classList.add("animate");
+                      kembali.style.display ="block";
+                      clearInterval(decibelInterval);
+                      clearInterval(intervalDuration);
+                    }else if(duration <= 0 && decibels < 200){
+                      scream.className = "text-4xl font-bold text-center text-white z-20 duration-500 transform"
+                      scream.innerHTML = "SAYANG SEKALI :(";
+                      indicator.style.display="none";
+                      kembali.style.display ="block";
+                      // start.className ="block mt-10 z-20 px-4 py-2 bg-yellow-500 text-4xl text-black rounded-xl shadow-xl duration-500 transform";
+                      clearInterval(decibelInterval);
+                      clearInterval(intervalDuration);
+                    }
+                  }, 100);
+                });
+              }, 1000);
             }
-
-            var level = 2; // you can adjust the level from 1.0 to 10.0
-            decibels = (10 * decibels) / dataArray.length / level;
-            decibelmeter.style.height = decibels + "px";
-
-            if (decibels >= 600) {
-              scream.style.color = "white";
-              scream.innerHTML = "SELAMAT!, KAMU BERHASIL !!";
-              icecream.classList.add("animate");
-              clearInterval(decibelInterval);
-            }
-          }, 100);
-        });
+          },1000);
+        },2000)
+        
       });
     </script>
   </body>
