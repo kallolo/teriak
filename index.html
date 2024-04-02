@@ -4,7 +4,7 @@
   </head>
   <style>
     .icecream {
-      width: 250px;
+      /* width: 250px; */
       display: block;
       z-index: 20;
     }
@@ -31,11 +31,13 @@
   </style>
   <body class="w-full h-[100dvh] flex flex-col">
   <div class="w-full flex flex-row justify-start items-center flex-col bg-red-900 p-4 h-full">
-      <img src="goeboex1.png" class="icecream" alt="logo" />
-        <h1 id="scream" class="text-6xl font-bold text-center text-white z-20 duration-500 transform">Serukan Semangatmu, Luapkan Emosimu</h1>
-        <button type="button" id="start" class="block mt-10 z-20 px-4 py-2 bg-yellow-500 text-4xl text-black rounded-xl shadow-xl duration-500 transforml">Klik Mulai</button>
-        <button type="button" id="kembali" class="hidden mt-10 z-20 px-4 py-2 bg-gray-100 text-2xl text-black rounded-xl shadow-xl duration-500 transforml">Kembali</button>
-      <!-- <p class="tes"></p> -->
+    <img src="goeboex1.png" class="icecream w-[650px] lg:w-[450px]" alt="logo" />
+    <div class="w-[90%] lg:w-[30%] flex flex-col justify-center items-center text-center">
+      <h1 id="scream" class="text-8xl lg:text-6xl font-bold text-white z-20 duration-500 transform">Serukan Semangatmu, Luapkan Emosimu</h1>
+      <button type="button" id="start" class="block mt-10 z-20 px-4 py-2 bg-yellow-500 text-4xl text-black rounded-xl shadow-xl duration-500 transforml">Klik Mulai</button>
+      <button type="button" id="kembali" class="hidden mt-10 z-20 px-4 py-2 bg-gray-100 text-2xl text-black rounded-xl shadow-xl duration-500 transforml">Kembali</button>
+    <!-- <p class="tes"></p> -->
+    </div>
     </div>
     <div id="indicator" class="h-full relative overflow-hidden bg-red-900 w-full flex hidden h-full">
       <div class="decibelmeter"></div>
@@ -73,7 +75,7 @@
         var audioContext = new AudioContext();
         var streamPromise = navigator.mediaDevices.getUserMedia({ audio: true });
         start.style.display ="none";
-        scream.className = "text-6xl font-bold text-center text-white z-20 duration-500 transform animate-bounce"
+        scream.className = "text-9xl lg:text-6xl font-bold text-center text-white z-20 duration-500 transform animate-bounce"
         scream.innerHTML = "SIAP - SIAP";
         var intervalCountdown;
         var intervalDuration;
@@ -81,7 +83,7 @@
         setTimeout(()=>{
             intervalCountdown = setInterval(function(){
             countdown -=1;
-            scream.className = "text-9xl font-bold text-center text-white z-20 duration-500 transform"
+            scream.className = "text-[350px] lg:text-9xl font-bold text-center text-white z-20 duration-500 transform"
             scream.innerHTML = countdown;
             // console.log(countdown)
             if(countdown<=0){
@@ -94,7 +96,7 @@
               intervalDuration = setInterval(function(){
                 duration -=100;
                 var format_duration = millisToMinutesAndSeconds(duration);
-                scream.className = "text-5xl font-bold text-center text-white z-20 duration-500 transform"
+                scream.className = "text-8xl lg:text-5xl font-bold text-center text-white z-20 duration-500 transform"
                 scream.innerHTML = format_duration;
                   var dataArray = new Uint8Array(analyser.frequencyBinCount);
                   analyser.getByteFrequencyData(dataArray);
@@ -110,14 +112,14 @@
                   decibelmeter.style.height = persen + "%";
                   if(duration <= 0){
                     clearInterval(intervalDuration);
-                    scream.className = "text-4xl font-bold text-center text-white z-20 duration-500 transform"
+                    scream.className = "text-7xl lg:text-4xl font-bold text-center text-white z-20 duration-500 transform"
                     scream.innerHTML = "SAYANG SEKALI :(";
                     indicator.style.display="none";
                     kembali.style.display ="block";
                   }else if (decibels >= 600 && duration > 0) { //600
                     indicator.style.display="none";
-                    scream.className = "text-6xl font-bold text-white text-center"
-                    scream.innerHTML = "SELAMAT!, KAMU BERHASIL !!";
+                    scream.className = "text-8xl lg:text-6xl font-bold text-white text-center"
+                    scream.innerHTML = "SELAMAT!, KAMU BERHASIL !";
                     icecream.classList.add("animate");
                     kembali.style.display ="block";
                     clearInterval(intervalDuration);
