@@ -1,6 +1,7 @@
 <html>
-  <head> 
+  <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>Goeboex Masweka</title>
   </head>
   <style>
     .icecream {
@@ -30,24 +31,80 @@
     }
   </style>
   <body class="w-full h-[100dvh] flex flex-col">
-  <div class="w-full flex flex-row justify-start items-center flex-col bg-red-900 p-4 h-full">
-    <img src="goeboex1.png" class="icecream w-[650px] lg:w-[450px]" alt="logo" />
-    <div class="w-[90%] lg:w-[30%] flex flex-col justify-center items-center text-center">
-      <h1 id="scream" class="text-8xl lg:text-6xl font-bold text-white z-20 duration-500 transform">Serukan Semangatmu, Luapkan Emosimu</h1>
-      <button type="button" id="start" class="block mt-10 z-20 px-4 py-2 bg-yellow-500 text-4xl text-black rounded-xl shadow-xl duration-500 transforml">Klik Mulai</button>
-      <button type="button" id="kembali" class="hidden mt-10 z-20 px-4 py-2 bg-gray-100 text-2xl text-black rounded-xl shadow-xl duration-500 transforml">Kembali</button>
-    <!-- <p class="tes"></p> -->
+    <div
+      class="w-full flex flex-row justify-start items-center flex-col bg-red-900 p-4 h-full"
+    >
+      <img
+        src="goeboex1.png"
+        class="icecream w-[650px] lg:w-[450px]"
+        alt="logo"
+      />
+      <div class="w-full flex flex-col justify-center items-center text-center">
+        <h1
+          id="scream"
+          class="text-9xl font-bold text-white z-20 duration-500 transform"
+        >
+          Serukan<br />
+          Semangatmu,<br />
+          Luapkan <br />Emosimu
+        </h1>
+        <p id="keterangan" class="hidden text-7xl text-center text-white mt-14">
+          Silahkan Pilih Hadiah <br />
+          Semangatmu secara acak <br />
+          semoga beruntung
+        </p>
+        <button
+          type="button"
+          id="start"
+          class="block mt-14 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transforml"
+        >
+          Klik Mulai
+        </button>
+        <button
+          type="button"
+          id="hadiah"
+          class="hidden mt-14 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transforml"
+        >
+          Hadiah
+        </button>
+        <button
+          type="button"
+          id="kembali"
+          class="hidden mt-10 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transforml"
+        >
+          Kembali
+        </button>
+        <!-- <p class="tes"></p> -->
+      </div>
     </div>
-    </div>
-    <div id="indicator" class="h-full relative overflow-hidden bg-red-900 w-full flex hidden h-full">
+    <div
+      id="indicator"
+      class="h-full relative overflow-hidden bg-red-900 w-full flex hidden h-full"
+    >
       <div class="decibelmeter"></div>
-      <div class="absolute buttom-0 right-5 border-r-2 h-full flex flex-col justify-between px-2 items-end border-dashed">
+      <div
+        class="absolute buttom-0 right-5 border-r-2 h-full flex flex-col justify-between px-2 items-end border-dashed"
+      >
         <h1 class="text-white text-xl font-bold">100%</h1>
         <h1 class="text-white text-xl font-bold">50%</h1>
         <h1 class="text-white text-xl font-bold">0%</h1>
       </div>
     </div>
     <script>
+      const data = [
+        "Cappucino",
+        "Teh Tarik",
+        "Air Mineral",
+        "Es Teh",
+        "Air Mineral",
+        "Kopi",
+        "Milo",
+        "Jus Alpukat",
+        "Air Mineral",
+        "Es Sirup",
+        "Air Mineral",
+        "Pokat Kocok",
+      ];
       var scream = document.querySelector("#scream");
       var icecream = document.querySelector(".icecream");
       var decibelmeter = document.querySelector(".decibelmeter");
@@ -55,80 +112,113 @@
       var indicator = document.querySelector("#indicator");
       var tes = document.querySelector(".tes");
       var kembali = document.querySelector("#kembali");
+      var keterangan = document.querySelector("#keterangan");
+      var hadiah = document.querySelector("#hadiah");
       function millisToMinutesAndSeconds(millis) {
-  var minutes = Math.floor(millis / 60000);
-  var seconds = ((millis % 60000) / 1000).toFixed(0);
-  return (minutes<10?'0':'')+ minutes + ":" + (seconds < 10 ? '0' : '') + seconds + "."+millis.toString().substring(0,3);
-}
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        return (
+          (minutes < 10 ? "0" : "") +
+          minutes +
+          ":" +
+          (seconds < 10 ? "0" : "") +
+          seconds +
+          "." +
+          millis.toString().substring(2, 5)
+        );
+      }
 
-      kembali.addEventListener('click', function(){
-        start.style.display ="block";
-        kembali.style.display ="none";
-        scream.className = "text-6xl font-bold text-center text-white z-20 duration-500 transform"
-        scream.innerHTML = "Serukan Semangatmu, Luapkan Emosimu";
+      kembali.addEventListener("click", function () {
+        start.style.display = "block";
+        kembali.style.display = "none";
+        scream.className =
+          "text-9xl font-bold text-white z-20 duration-500 transform";
+        scream.innerHTML =
+          "Serukan <br/> Semangatmu,<br/> Luapkan <br/> Emosimu <br/>";
       });
 
-     
+      hadiah.addEventListener("click", function () {
+        kembali.style.display = "block";
+        hadiah.style.display = "none";
+        scream.className =
+          "text-9xl font-bold text-white z-20 duration-500 transform";
+        scream.innerHTML = "Horeeeeee, <br/> Kamu dapat";
+        keterangan.style.display = "none";
+        kembali.innerHTML = data[Math.floor(Math.random() * data.length)];
+      });
+
       start.addEventListener("click", function () {
         var countdown = 4;
-        var duration = 20000; //20 detik
+        var duration = 15000; //15 detik
         var audioContext = new AudioContext();
-        var streamPromise = navigator.mediaDevices.getUserMedia({ audio: true });
-        start.style.display ="none";
-        scream.className = "text-9xl lg:text-6xl font-bold text-center text-white z-20 duration-500 transform animate-bounce"
-        scream.innerHTML = "SIAP - SIAP";
+        var streamPromise = navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        start.style.display = "none";
+        scream.className =
+          "text-9xl font-bold text-center text-white z-20 duration-500 transform animate-bounce";
+        scream.innerHTML = "SIAP <br/> SIAP";
         var intervalCountdown;
         var intervalDuration;
         var decibelInterval;
-        setTimeout(()=>{
-            intervalCountdown = setInterval(function(){
-            countdown -=1;
-            scream.className = "text-[350px] lg:text-9xl font-bold text-center text-white z-20 duration-500 transform"
+        setTimeout(() => {
+          intervalCountdown = setInterval(function () {
+            countdown -= 1;
+            scream.className =
+              "text-[450px] font-bold text-center text-white z-20 duration-500 transform";
             scream.innerHTML = countdown;
             // console.log(countdown)
-            if(countdown<=0){
-            clearInterval(intervalCountdown);
-            indicator.style.display="block";
-            streamPromise.then(function (stream) {
-              var microphone = audioContext.createMediaStreamSource(stream);
-              var analyser = audioContext.createAnalyser();
-              microphone.connect(analyser);
-              intervalDuration = setInterval(function(){
-                duration -=100;
-                var format_duration = millisToMinutesAndSeconds(duration);
-                scream.className = "text-8xl lg:text-5xl font-bold text-center text-white z-20 duration-500 transform"
-                scream.innerHTML = format_duration;
+            if (countdown <= 0) {
+              clearInterval(intervalCountdown);
+              indicator.style.display = "block";
+              streamPromise.then(function (stream) {
+                var microphone = audioContext.createMediaStreamSource(stream);
+                var analyser = audioContext.createAnalyser();
+                microphone.connect(analyser);
+                intervalDuration = setInterval(function () {
+                  duration -= 51;
+                  var format_duration = millisToMinutesAndSeconds(duration);
+                  scream.className =
+                    "text-8xl lg:text-5xl font-bold text-center text-white z-20 duration-500 transform";
+                  scream.innerHTML = format_duration;
                   var dataArray = new Uint8Array(analyser.frequencyBinCount);
                   analyser.getByteFrequencyData(dataArray);
 
                   var decibels = 0;
                   for (var i = 0; i < dataArray.length; i++) {
-                      decibels += dataArray[i];
+                    decibels += dataArray[i];
                   }
 
                   var level = 2; // you can adjust the level from 1.0 to 10.0
                   decibels = (10 * decibels) / dataArray.length / level;
-                  let persen = (decibels/600)*100;
+                  let persen = (decibels / 1200) * 100;
                   decibelmeter.style.height = persen + "%";
-                  if(duration <= 0){
+                  if (duration <= 0) {
                     clearInterval(intervalDuration);
-                    scream.className = "text-7xl lg:text-4xl font-bold text-center text-white z-20 duration-500 transform"
+                    scream.className =
+                      "text-7xl lg:text-4xl font-bold text-center text-white z-20 duration-500 transform";
                     scream.innerHTML = "SAYANG SEKALI :(";
-                    indicator.style.display="none";
-                    kembali.style.display ="block";
-                  }else if (decibels >= 600 && duration > 0) { //600
-                    indicator.style.display="none";
-                    scream.className = "text-8xl lg:text-6xl font-bold text-white text-center"
-                    scream.innerHTML = "SELAMAT!, KAMU BERHASIL !";
+                    indicator.style.display = "none";
+                    kembali.style.display = "block";
+                    keterangan.style.display = "block";
+                    keterangan.innerHTML =
+                      "Sepertinya Kamu <br/> Kurang Semangat";
+                  } else if (decibels >= 1200 && duration > 0) {
+                    //600
+                    indicator.style.display = "none";
+                    scream.className =
+                      "text-9xl font-bold text-yellow-500 text-center";
+                    scream.innerHTML = "HEBAT <br/> kamu berhasil";
                     icecream.classList.add("animate");
-                    kembali.style.display ="block";
+                    hadiah.style.display = "block";
+                    keterangan.style.display = "block";
                     clearInterval(intervalDuration);
                   }
-            }, 100)
-            })
+                }, 51);
+              });
             }
-          },1000);
-        },2000);
+          }, 1000);
+        }, 2000);
       });
     </script>
   </body>
