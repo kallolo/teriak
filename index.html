@@ -1,9 +1,22 @@
 <html>
   <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    \
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Goeboex Masweka</title>
   </head>
   <style>
+    .league-spartan {
+      font-family: "League Spartan", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 900;
+      font-style: normal;
+    }
     .icecream {
       /* width: 250px; */
       display: block;
@@ -42,13 +55,16 @@
       <div class="w-full flex flex-col justify-center items-center text-center">
         <h1
           id="scream"
-          class="text-9xl font-bold text-white z-20 duration-500 transform"
+          class="text-9xl font-bold text-white z-20 duration-500 transform league-spartan"
         >
           Serukan<br />
           Semangatmu,<br />
           Luapkan <br />Emosimu
         </h1>
-        <p id="keterangan" class="hidden text-7xl text-center text-white mt-14">
+        <p
+          id="keterangan"
+          class="hidden text-7xl text-center text-white mt-14 league-spartan"
+        >
           Silahkan Pilih Hadiah <br />
           Semangatmu secara acak <br />
           semoga beruntung
@@ -56,21 +72,21 @@
         <button
           type="button"
           id="start"
-          class="block mt-14 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transforml"
+          class="block mt-14 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transform league-spartan"
         >
           Klik Mulai
         </button>
         <button
           type="button"
           id="hadiah"
-          class="hidden mt-14 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transforml"
+          class="hidden mt-14 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transform league-spartan"
         >
           Hadiah
         </button>
         <button
           type="button"
           id="kembali"
-          class="hidden mt-10 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transforml"
+          class="hidden mt-10 z-20 px-6 py-4 bg-yellow-500 text-8xl text-black rounded-xl shadow-xl duration-500 transform league-spartan"
         >
           Kembali
         </button>
@@ -79,9 +95,9 @@
     </div>
     <div
       id="indicator"
-      class="h-full relative overflow-hidden bg-red-900 w-full flex hidden h-full"
+      class="h-full relative overflow-hidden bg-red-900 w-full flex hidden h-full league-spartan"
     >
-      <div class="decibelmeter"></div>
+      <div class="decibelmeter league-spartan"></div>
       <div
         class="absolute buttom-0 right-5 border-r-2 h-full flex flex-col justify-between px-2 items-end border-dashed"
       >
@@ -133,7 +149,7 @@
         kembali.style.display = "none";
         keterangan.style.display = "none";
         scream.className =
-          "text-9xl font-bold text-white z-20 duration-500 transform";
+          "text-9xl font-bold text-white z-20 duration-500 transform league-spartan";
         scream.innerHTML =
           "Serukan <br/> Semangatmu,<br/> Luapkan <br/> Emosimu <br/>";
       });
@@ -143,7 +159,7 @@
         hadiah.style.display = "none";
         keterangan.style.display = "none";
         scream.className =
-          "text-9xl font-bold text-white z-20 duration-500 transform";
+          "text-9xl font-bold text-white z-20 duration-500 transform league-spartan";
         scream.innerHTML = "Horeeeeee, <br/> Kamu dapat";
         keterangan.style.display = "none";
         kembali.innerHTML = data[Math.floor(Math.random() * data.length)];
@@ -158,7 +174,7 @@
         });
         start.style.display = "none";
         scream.className =
-          "text-9xl font-bold text-center text-white z-20 duration-500 transform animate-bounce";
+          "text-9xl font-bold text-center text-white z-20 duration-500 transform animate-bounce league-spartan";
         scream.innerHTML = "SIAP <br/> SIAP";
         keterangan.innerHTML =
           " Silahkan Pilih Hadiah <br /> Semangatmu secara acak <br /> semoga beruntung";
@@ -169,7 +185,7 @@
           intervalCountdown = setInterval(function () {
             countdown -= 1;
             scream.className =
-              "text-[450px] font-bold text-center text-white z-20 duration-500 transform";
+              "text-[450px] font-bold text-center text-white z-20 duration-500 transform league-spartan";
             scream.innerHTML = countdown;
             // console.log(countdown)
             if (countdown <= 0) {
@@ -183,7 +199,7 @@
                   duration -= 51;
                   var format_duration = millisToMinutesAndSeconds(duration);
                   scream.className =
-                    "text-8xl lg:text-5xl font-bold text-center text-white z-20 duration-500 transform";
+                    "text-8xl lg:text-5xl font-bold text-center text-white z-20 duration-500 transform league-spartan";
                   scream.innerHTML = format_duration;
                   var dataArray = new Uint8Array(analyser.frequencyBinCount);
                   analyser.getByteFrequencyData(dataArray);
@@ -200,7 +216,7 @@
                   if (duration <= 0) {
                     clearInterval(intervalDuration);
                     scream.className =
-                      "text-7xl lg:text-4xl font-bold text-center text-white z-20 duration-500 transform";
+                      "text-7xl lg:text-4xl font-bold text-center text-white z-20 duration-500 transform league-spartan";
                     scream.innerHTML = "SAYANG SEKALI :(";
                     indicator.style.display = "none";
                     kembali.style.display = "block";
@@ -211,7 +227,7 @@
                     //600
                     indicator.style.display = "none";
                     scream.className =
-                      "text-9xl font-bold text-yellow-500 text-center";
+                      "text-9xl font-bold text-yellow-500 text-center league-spartan";
                     scream.innerHTML = "HEBAT <br/> kamu berhasil";
                     icecream.classList.add("animate");
                     hadiah.style.display = "block";
